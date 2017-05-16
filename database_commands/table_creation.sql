@@ -33,7 +33,8 @@ create table Professor {
 create table Piscina {
 	id int primary key,
 	nome varchar(255) not null,
-	endereco varchar(255) not null
+	endereco varchar(255) not null,
+	comprimento int not null
 }
 
 create table Tipo_Estado_Raia {
