@@ -1,6 +1,6 @@
 -- table creation commands for the High Tech Pool database
 
-create table Pessoa {
+create table Pessoa (
 	id int primary key,
 	CPF int,
 	RG int,
@@ -9,38 +9,38 @@ create table Pessoa {
 	endereco varchar(255) not null,
 	telefone varchar(255) not null,
 	data_nascimento date not null,
-	data_inscricao date not null
-}
+	data_inscricao timestamp not null
+);
 
-create table Nadador {
+create table Nadador (
 	id int primary key,
 	foreign key (id) 
 		references Pessoa(id)
-}
+);
 
-create table Gerente {
+create table Gerente (
 	id int primary key,
 	foreign key (id) 
 		references Pessoa(id)
-}
+);
 
-create table Professor {
+create table Professor (
 	id int primary key,
 	foreign key (id) 
 		references Pessoa(id)
-}
+);
 
-create table Piscina {
+create table Piscina (
 	id int primary key,
 	nome varchar(255) not null,
 	endereco varchar(255) not null
-}
+);
 
-create table Tipo_Estado_Raia {
+create table Tipo_Estado_Raia (
 	estado varchar(255) primary key
-}
+);
 
-create table Raia {
+create table Raia (
 	id int primary key,
 	numero int not null,
 	piscina_id int not null,
@@ -49,9 +49,9 @@ create table Raia {
 		references Piscina(id),
 	foreign key (estado) 
 		references Tipo_Estado_Raia(estado)
-}
+);
 
-create table Tipo_Treinamento {
+create table Tipo_Treinamento (
 	id int primary key,
 	nome varchar(255) not null,
 	descricao varchar(4096) not null,
@@ -59,9 +59,9 @@ create table Tipo_Treinamento {
 	nivel_de_esforco int not null,
 	check (nivel_de_dificuldade <= 10 and nivel_de_dificuldade >= 1),
 	check (nivel_de_esforco <= 10 and nivel_de_esforco >= 1)
-}
+);
 
-create table Tipo_Exercicio {
+create table Tipo_Exercicio (
 	id int primary key,
 	nome varchar(255) not null,
 	descricao varchar(4096) not null,
@@ -69,13 +69,13 @@ create table Tipo_Exercicio {
 	nivel_de_esforco int not null,
 	check (nivel_de_dificuldade <= 10 and nivel_de_dificuldade >= 1),
 	check (nivel_de_esforco <= 10 and nivel_de_esforco >= 1)
-}
+);
 
-create table Tipo_Nado {
+create table Tipo_Nado (
 	estilo varchar(255) primary key
-}
+);
 
-create table Tipo_Volta {
+create table Tipo_Volta (
 	id int primary key,
 	estilo_nado_ida varchar(255) not null,
 	estilo_nado_retorno varchar(255),
@@ -83,9 +83,9 @@ create table Tipo_Volta {
 		references Tipo_Nado(estilo),
 	foreign key (estilo_nado_retorno) 
 		references Tipo_Nado(estilo)
-}
+);
 
-create table Tipo_Treinamento_Contem_Tipo_Exercicio {
+create table Tipo_Treinamento_Contem_Tipo_Exercicio (
 	id_tipo_treinamento int,
 	id_tipo_exercicio int,
 	numero_de_sequencia int,
@@ -95,9 +95,9 @@ create table Tipo_Treinamento_Contem_Tipo_Exercicio {
 		references Tipo_Treinamento(id),
 	foreign key (id_tipo_exercicio) 
 		references Tipo_Exercicio(id)
-}
+);
 
-create table Tipo_Exercicio_Contem_Tipo_Volta {
+create table Tipo_Exercicio_Contem_Tipo_Volta (
 	id_tipo_exercicio int,
 	id_tipo_volta int,
 	numero_de_sequencia int,
@@ -107,9 +107,9 @@ create table Tipo_Exercicio_Contem_Tipo_Volta {
 		references Tipo_Exercicio(id)	
 	foreign key (id_tipo_volta) 
 		references Tipo_Volta(id),
-}
+);
 
-create table Recomendacao {
+create table Recomendacao (
 	id_professor int,
 	id_tipo_treinamento int,
 	id_nadador int,
@@ -121,9 +121,9 @@ create table Recomendacao {
 		references Tipo_Treinamento(id),
 	foreign key id_nadador 
 		references Nadador(id)
-}
+);
 
-create table Treinamento {
+create table Treinamento (
 	id_tipo_treinamento int,
 	id_nadador int,
 	data_horario_inicio timestamp
@@ -132,9 +132,9 @@ create table Treinamento {
 		references Tipo_Treinamento(id),
 	foreign key (id_nadador) 
 		references Nadador(id)
-}
+);
 
-create table Exercicio { 
+create table Exercicio ( 
 	id_tipo_treinamento int,
 	id_nadador int,
 	data_horario_inicio_treinamento timestamp,
@@ -146,9 +146,9 @@ create table Exercicio {
 		references Tipo_Treinamento_Contem_Tipo_Exercicio(id_tipo_treinamento, id_tipo_exercicio, numero_de_sequencia),
 	foreign key (id_tipo_treinamento, id_nadador, data_horario_inicio_treinamento) 
 		references Treinamento(id_tipo_treinamento, id_nadador, data_horario_inicio)
-}
+);
 
-create table Volta {
+create table Volta (
 	id_tipo_treinamento int,
 	id_nadador int,
 	data_horario_inicio_treinamento timestamp,
@@ -164,9 +164,9 @@ create table Volta {
 		references Exercicio(id_tipo_treinamento, id_nadador, data_horario_inicio_treinamento, id_tipo_exercicio, numero_de_sequencia),
 	foreign key (id_tipo_exercicio, id_tipo_volta, numero_de_sequencia_volta)
 		references Tipo_Exercicio_Contem_Tipo_Volta(id_tipo_exercicio, id_tipo_volta, numero_de_sequencia)		
-}
+);
 
-create table Comparacao_Treinamento {
+create table Comparacao_Treinamento (
 	id_tipo_treinamento int,
 	id_nadador int,
 	data_horario_inicio timestamp,
@@ -179,9 +179,9 @@ create table Comparacao_Treinamento {
 		references Treinamento(id_tipo_treinamento, id_nadador, data_horario_inicio),
 	foreign key (id_tipo_treinamento_comparacao, id_nadador_comparacao, data_horario_inicio_comparacao)
 		references Treinamento(id_tipo_treinamento, id_nadador, data_horario_inicio),				
-}
+);
 
-create table Sessao {
+create table Sessao (
 	id_nadador int,
 	id_raia int,
 	data_horario_inicio timestamp,
@@ -193,9 +193,9 @@ create table Sessao {
 	foreign key (id_raia)
 		references Raia(id),
 	check (data_horario_fim is null or data_horario_fim > data_horario_inicio)
-}
+);
 
-create table Agendamento {
+create table Agendamento (
 	data_horario_inicio timestamp,
 	id_raia int,
 	id_nadador int not null,
@@ -205,9 +205,9 @@ create table Agendamento {
 		references Raia(id),
 	foreign key	(id_nadador)
 		references Nadador(id)
-}
+);
 
-create table Temperatura {
+create table Temperatura (
 	id_piscina int,
 	momento_de_medicao timestamp,
 	temperatura real not null,
@@ -215,17 +215,17 @@ create table Temperatura {
 		primary key (id_piscina, momento_de_medicao)
 	foreign key (id_piscina)
 		references Piscina(id)
-}
+);
 
-create table Tipo_Sensor {
+create table Tipo_Sensor (
 	tipo varchar(255) primary key
-}
+);
 
-create table Tipo_Estado_Sensor {
+create table Tipo_Estado_Sensor (
 	estado varchar(255) primary key
-}
+);
 
-create table Sensor {
+create table Sensor (
 	id_sensor int primary key,
 	tipo varchar(255),
 	estado varchar(255),
@@ -233,18 +233,18 @@ create table Sensor {
 		references Tipo_Sensor(tipo),
 	foreign key estado 
 		references Tipo_Estado_Sensor(estado)
-}
+);
 
-create table Sensor_Raia {
+create table Sensor_Raia (
 	id_sensor int primary key,
 	id_raia int,
 	foreign key id_raia
 		references Raia(id)
-}
+);
 
-create table Sensor_Piscina {
+create table Sensor_Piscina (
 	id_sensor int primary key,
 	id_piscina int,
 	foreign key id_piscina
 		references Piscina(id)
-}
+);
