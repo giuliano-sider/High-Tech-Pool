@@ -84,10 +84,10 @@ insert into Professor (id)
 
 -- pools
 
-insert into Piscina (id, nome, endereco)
-	values (1, 'Piscinão de Ramos', 'Rua Ernesto Coliforme, Bangu, RJ');
-insert into Piscina (id, nome, endereco)
-	values (2, 'High Tech Pool', 'Rua Saturnino de Brito, 573, Campus Zeferino Vaz, Barão Geraldo, Campinas, SP, Brasil');
+insert into Piscina (id, nome, endereco, comprimento)
+	values (1, 'Piscinão de Ramos', 'Rua Ernesto Coliforme, Bangu, RJ', 3000);
+insert into Piscina (id, nome, endereco, comprimento)
+	values (2, 'High Tech Pool', 'Rua Saturnino de Brito, 573, Campus Zeferino Vaz, Barão Geraldo, Campinas, SP, Brasil', 50);
 
 
 -- swimming lanes may be in the following states:
