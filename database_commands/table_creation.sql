@@ -1,4 +1,5 @@
 -- table creation commands for the High Tech Pool database
+-- create it in a single transaction so it gets rolled back on error
 
 create table Pessoa (
 	id int primary key,
@@ -29,6 +30,7 @@ create table Equipe_Revezamento (
 create table Revezamento (
 	id_equipe int,
 	id_nadador int,
+	primary key (id_equipe, id_nadador)
 
 	foreign key (id_equipe)
 		references Equipe_Revezamento(id),
