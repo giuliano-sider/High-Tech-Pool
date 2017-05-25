@@ -15,7 +15,7 @@ create table Pessoa (
 
 create table Nadador (
 	id int primary key,
-	
+
 	foreign key (id) 
 		references Pessoa(id)
 );
@@ -45,7 +45,7 @@ create table Equipe_Revezamento (
 create table Revezamento (
 	id_equipe int,
 	id_nadador int,
-	primary key (id_equipe, id_nadador)
+	primary key (id_equipe, id_nadador),
 
 	foreign key (id_equipe)
 		references Equipe_Revezamento(id),
@@ -58,8 +58,8 @@ create table Revezamento (
 create table Piscina (
 	id int primary key,
 	nome varchar(255) not null,
-	endereco varchar(255) not null
-	comprimento int not null -- in meters
+	endereco varchar(255) not null,
+	comprimento int not null
 );
 
 create table Tipo_Estado_Raia (
@@ -118,7 +118,7 @@ create table Tipo_Subexercicio (
 	comprimento int not null, -- in meters
 
 	foreign key (estilo_nado) 
-		references Tipo_Nado(estilo),
+		references Tipo_Nado(estilo)
 );
 
 -- treinamento é composto de sequência de exercícios
@@ -143,10 +143,10 @@ create table Sequencia_Exercicio (
 	primary key (id_tipo_exercicio, numero_de_sequencia),
 	
 	foreign key (id_tipo_exercicio) 
-		references Tipo_Exercicio(id)	
+		references Tipo_Exercicio(id),	
 	
 	foreign key (id_tipo_subexercicio) 
-		references Tipo_Subexercicio(id),
+		references Tipo_Subexercicio(id)
 );
 
 -- professor recomenda treinamento a nadador
@@ -156,13 +156,13 @@ create table Recomendacao (
 	id_nadador int,
 	primary key (id_professor, id_tipo_treinamento, id_nadador),
 	
-	foreign key id_professor 
+	foreign key (id_professor) 
 		references Professor(id),
 	
-	foreign key id_tipo_treinamento 
+	foreign key (id_tipo_treinamento) 
 		references Tipo_Treinamento(id),
 	
-	foreign key id_nadador 
+	foreign key (id_nadador) 
 		references Nadador(id)
 );
 
@@ -221,7 +221,7 @@ create table Parcial (
 	primary key (id_tipo_treinamento, id_nadador, data_horario_inicio_treinamento, numero_de_sequencia_exercicio, numero_de_sequencia_parcial),
 	
 	foreign key (id_tipo_treinamento, id_nadador, data_horario_inicio_treinamento, numero_de_sequencia_exercicio) 
-		references Exercicio(id_tipo_treinamento, id_nadador, data_horario_inicio_treinamento, numero_de_sequencia),
+		references Exercicio(id_tipo_treinamento, id_nadador, data_horario_inicio_treinamento, numero_de_sequencia)
 );
 
 
@@ -240,7 +240,7 @@ create table Comparacao_Treinamento (
 		references Treinamento(id_tipo_treinamento, id_nadador, data_horario_inicio),
 	
 	foreign key (id_tipo_treinamento_comparacao, id_nadador_comparacao, data_horario_inicio_comparacao)
-		references Treinamento(id_tipo_treinamento, id_nadador, data_horario_inicio),				
+		references Treinamento(id_tipo_treinamento, id_nadador, data_horario_inicio)
 );
 
 create table Comparacao_Exercicio (
@@ -299,7 +299,7 @@ create table Temperatura (
 	id_piscina int,
 	momento_de_medicao timestamp,
 	temperatura real not null,
-	primary key (id_piscina, momento_de_medicao)
+	primary key (id_piscina, momento_de_medicao),
 	
 	foreign key (id_piscina)
 		references Piscina(id)
@@ -319,10 +319,10 @@ create table Sensor (
 	tipo varchar(255),
 	estado varchar(255),
 	
-	foreign key tipo
+	foreign key (tipo)
 		references Tipo_Sensor(tipo),
 	
-	foreign key estado 
+	foreign key (estado) 
 		references Tipo_Estado_Sensor(estado)
 );
 
@@ -339,6 +339,6 @@ create table Sensor_Piscina (
 	id_sensor int primary key,
 	id_piscina int,
 	
-	foreign key id_piscina
+	foreign key (id_piscina)
 		references Piscina(id)
 );
