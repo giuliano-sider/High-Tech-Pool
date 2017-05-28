@@ -45,7 +45,7 @@ create table Equipe_Revezamento (
 create table Revezamento (
 	id_equipe int,
 	id_nadador int,
-	primary key (id_equipe, id_nadador)
+	primary key (id_equipe, id_nadador),
 
 	foreign key (id_equipe)
 		references Equipe_Revezamento(id),
@@ -58,7 +58,7 @@ create table Revezamento (
 create table Piscina (
 	id int primary key,
 	nome varchar(255) not null,
-	endereco varchar(255) not null
+	endereco varchar(255) not null,
 	comprimento int not null -- in meters
 );
 
