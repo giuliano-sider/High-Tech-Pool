@@ -1,46 +1,49 @@
 -- insert some sample tuples for the High Tech Pool database. do this only once.
 
 
+use High_Tech_Pool;
+
+
 -- some people
 
 insert into Pessoa (id, nome, sobrenome, endereco, telefone, data_nascimento, data_inscricao)
-	values (1, 'Charlinho', 'Rua Sambaqui, 1, Santa Rosa del Pipoco, AM', '(92) 01010001', '2009-10-08', '2017-05-18 15-39-09');
+	values (1, 'Charlinho', 'Nascimento', 'Rua Sambaqui, 1, Santa Rosa del Pipoco, AM', '(92) 01010001', '2009-10-08', '2017-05-18 15:39:09');
 
 insert into Pessoa (id, nome, sobrenome, endereco, telefone, data_nascimento, data_inscricao)
-	values (2, 'Touro Sentado', 'Rua Sioux, 1890, Sioux Falls, SD', '1 234 3456 9030', '1831-10-08', '2017-05-18 15-40-09');
+	values (2, 'Touro', 'Sentado', 'Rua Sioux, 1890, Sioux Falls, SD', '1 234 3456 9030', '1831-10-08', '2017-05-18 15:40:09');
 
 insert into Pessoa (id, nome, sobrenome, endereco, telefone, data_nascimento, data_inscricao)
-	values (3, 'Diocleciano', 'Rua Maximus, 1, Roma, Itália', '00 123456', '0190-10-08', '2017-05-18 15-41-09');
+	values (3, 'Diocleciano', 'Caesar', 'Rua Maximus, 1, Roma, Itália', '00 123456', '0190-10-08', '2017-05-18 15:41:09');
 
 insert into Pessoa (id, nome, sobrenome, endereco, telefone, data_nascimento, data_inscricao)
-	values (4, 'Jesus', 'Rua Shalom, 1, Nazaré, Israel', '(92) 01010001', '0000-12-25', '2017-05-18 15-42-09');
+	values (4, 'Jesus', 'Valderlei', 'Rua Shalom, 1, Nazaré, Israel', '(92) 01010001', '0001-12-25', '2017-05-18 15:42:09');
 
 insert into Pessoa (id, nome, sobrenome, endereco, telefone, data_nascimento, data_inscricao)
-	values (5, 'Capeta', 'Nono círculo, 666, Inferno', '(666) 666', '0666-66-66', '2017-05-18 15-49-09');
+	values (5, 'Edilson', 'Capeta', 'Nono círculo, 666, Inferno', '(666) 666', '1666-06-06', '2017-05-18 15:49:09');
 
 insert into Pessoa (id, nome, sobrenome, endereco, telefone, data_nascimento, data_inscricao)
-	values (6, 'Asdrubal Barca', 'Rua Africa, 101, Cartago, Cartago', '(9696) 01010001', '1900-10-08', '2017-05-18 15-59-09');
+	values (6, 'Asdrubal', 'Barca', 'Rua Africa, 101, Cartago, Cartago', '(9696) 01010001', '1900-10-08', '2017-05-18 15:59:09');
 
 insert into Pessoa (id, CPF, RG, nome, sobrenome, endereco, telefone, data_nascimento, data_inscricao)
-	values (7, '858.333.666', '47.008.556', 'Ivan Drago', 'Rua Krasnoyarsk, 101, Yakutsk, Boroznievsk Oblast, Russian Federation', '(6) 07010001', '1960-10-08', '2017-05-18 16-59-39');
+	values (7, '858333666', '47008556', 'Ivan', 'Drago', 'Rua Krasnoyarsk, 101, Yakutsk, Boroznievsk Oblast, Russian Federation', '(6) 07010001', '1960-10-08', '2017-05-18 16:59:39');
 
 insert into Pessoa (id, CPF, RG, nome, sobrenome, endereco, telefone, data_nascimento, data_inscricao)
-	values (8, '858.332.666', '47.008.556', 'Rocky Balboa', 'Rua America, 101, America, NJ, America', '(6) 07010001', '1980-10-08', '2017-05-18 17-59-39');
+	values (8, '858332666', '47008556', 'Rocky', 'Balboa', 'Rua America, 101, America, NJ, America', '(6) 07010001', '1980-10-08', '2017-05-18 17:59:39');
 
 insert into Pessoa (id, CPF, RG, nome, sobrenome, endereco, telefone, data_nascimento, data_inscricao)
-	values (9, '858.333.666', '47.008.556', 'Robocop', 'Rua da Lei, 101, Los Angeles, CA, USA', '(6) 07010001', '1980-10-08', '2017-05-18 18-59-39');
+	values (9, '858333666', '47008556', 'Robocop', 'Padilha', 'Rua da Lei, 101, Los Angeles, CA, USA', '(6) 07010001', '1980-10-08', '2017-05-18 18:59:39');
 
 insert into Pessoa (id, CPF, RG, nome, sobrenome, endereco, telefone, data_nascimento, data_inscricao)
-	values (10, '858.333.668', '47.098.556', 'Simba', 'Rua Africa, 101, Windhoek, Namibia', '(6) 07010001', '1980-10-08', '2017-05-18 18-59-40');
+	values (10, '858333668', '47098556', 'Simba', 'Mufasa', 'Rua Africa, 101, Windhoek, Namibia', '(6) 07010001', '1980-10-08', '2017-05-18 18:59:40');
 
 insert into Pessoa (id, CPF, RG, nome, sobrenome, endereco, telefone, data_nascimento, data_inscricao)
-	values (11, '858.333.666', '47.008.556', 'Scar', 'Rua Africa, 101, Pretoria Federal Penitentiary, Pretoria, RSA', '(6) 07010001', '1980-10-08', '2017-05-18 19-59-39');
+	values (11, '858333666', '47008556', 'Scar', 'Judas', 'Rua Africa, 101, Pretoria Federal Penitentiary, Pretoria, RSA', '(6) 07010001', '1980-10-08', '2017-05-18 19:59:39');
 
 insert into Pessoa (id, CPF, RG, nome, sobrenome, endereco, telefone, data_nascimento, data_inscricao)
-	values (12, '858.333.666', '47.008.556', 'Scarface', 'Room 101, Alcatraz, CA, USA', '(6) 07010001', '1980-10-08', '2017-05-18 19-59-39');
+	values (12, '858333666', '47008556', 'Tony', 'Montana', 'Room 101, Alcatraz, CA, USA', '(6) 07010001', '1980-10-08', '2017-05-18 19:59:39');
 
 
---everybody swims around here except Robocop.
+-- everybody swims around here except Robocop.
 
 insert into Nadador (id)
 	values (1);
@@ -91,10 +94,10 @@ insert into Revezamento (id_equipe, id_nadador)
 	values (1, 3);
 
 insert into Revezamento (id_equipe, id_nadador)
-	values (1, 4);
+	values (1, 8);
 
 insert into Revezamento (id_equipe, id_nadador)
-	values (1, 5);
+	values (1, 2);
 
 insert into Revezamento (id_equipe, id_nadador)
 	values (1, 6);
@@ -132,54 +135,54 @@ insert into Tipo_Estado_Raia (estado)
 -- create some lanes for the existing pools
 
 -- piscinao de ramos has quite a number of lanes. 13 for good luck
-insert into Raia (numero, piscina_id)
-	values (1, 2)
-insert into Raia (id, numero, piscina_id)
-	values (2, 2)
-insert into Raia (id, numero, piscina_id)
-	values (3, 2)
-insert into Raia (id, numero, piscina_id)
-	values (4, 2)
-insert into Raia (id, numero, piscina_id)
-	values (5, 2)
-insert into Raia (id, numero, piscina_id)
-	values (6, 2)
-insert into Raia (id, numero, piscina_id)
-	values (7, 2)
-insert into Raia (id, numero, piscina_id)
-	values (8, 2)
-insert into Raia (id, numero, piscina_id)
-	values (9, 2)
-insert into Raia (id, numero, piscina_id)
-	values (10, 2)
-insert into Raia (id, numero, piscina_id)
-	values (11, 2)
-insert into Raia (id, numero, piscina_id)
-	values (12, 2)
-insert into Raia (id, numero, piscina_id)
-	values (13, 2)
+insert into Raia (numero, id_piscina)
+	values (1, 2);
+insert into Raia (numero, id_piscina)
+	values (2, 2);
+insert into Raia (numero, id_piscina)
+	values (3, 2);
+insert into Raia (numero, id_piscina)
+	values (4, 2);
+insert into Raia (numero, id_piscina)
+	values (5, 2);
+insert into Raia (numero, id_piscina)
+	values (6, 2);
+insert into Raia (numero, id_piscina)
+	values (7, 2);
+insert into Raia (numero, id_piscina)
+	values (8, 2);
+insert into Raia (numero, id_piscina)
+	values (9, 2);
+insert into Raia (numero, id_piscina)
+	values (10, 2);
+insert into Raia (numero, id_piscina)
+	values (11, 2);
+insert into Raia (numero, id_piscina)
+	values (12, 2);
+insert into Raia (numero, id_piscina)
+	values (13, 2);
 
 -- 10 lanes (theoretically...) at the high tech pool
-insert into Raia (numero, piscina_id)
-	values (1, 1)
-insert into Raia (id, numero, piscina_id)
-	values (2, 1)
-insert into Raia (id, numero, piscina_id)
-	values (3, 1)
-insert into Raia (id, numero, piscina_id)
-	values (4, 1)
-insert into Raia (id, numero, piscina_id)
-	values (5, 1)
-insert into Raia (id, numero, piscina_id)
-	values (6, 1)
-insert into Raia (id, numero, piscina_id)
-	values (7, 1)
-insert into Raia (id, numero, piscina_id)
-	values (8, 1)
-insert into Raia (id, numero, piscina_id)
-	values (9, 1)
-insert into Raia (id, numero, piscina_id)
-	values (10, 1)
+insert into Raia (numero, id_piscina)
+	values (1, 1);
+insert into Raia (numero, id_piscina)
+	values (2, 1);
+insert into Raia (numero, id_piscina)
+	values (3, 1);
+insert into Raia (numero, id_piscina)
+	values (4, 1);
+insert into Raia (numero, id_piscina)
+	values (5, 1);
+insert into Raia (numero, id_piscina)
+	values (6, 1);
+insert into Raia (numero, id_piscina)
+	values (7, 1);
+insert into Raia (numero, id_piscina)
+	values (8, 1);
+insert into Raia (numero, id_piscina)
+	values (9, 1);
+insert into Raia (numero, id_piscina)
+	values (10, 1);
 
 
 -- styles of swimming
@@ -236,27 +239,27 @@ insert into Tipo_Nado (estilo)
 
 insert into Tipo_Treinamento (id, nome, descricao, nivel_de_dificuldade, nivel_de_esforco)
 	values (1, 'Treino Casual Leve Misto',
-	           'Um treinamento diversificado com sequências curtas de crawl, peito, costas e borboleta'
+	           'Um treinamento diversificado com sequências curtas de crawl, peito, costas e borboleta',
 	           2, 2);
 
 insert into Tipo_Treinamento (id, nome, descricao, nivel_de_dificuldade, nivel_de_esforco)
 	values (2, 'Treino Casual Misto Longo',
-	           'Um treinamento diversificado com diversas sequências de crawl, peito, costas e borboleta'
+	           'Um treinamento diversificado com diversas sequências de crawl, peito, costas e borboleta',
 	           3, 6);
 
 insert into Tipo_Treinamento (id, nome, descricao, nivel_de_dificuldade, nivel_de_esforco)
 	values (3, 'Treino Pesado Sprints Variados',
-	           'Um treinamento com sequências curtas de sprint de várias modalidades'
+	           'Um treinamento com sequências curtas de sprint de várias modalidades',
 	           5, 7);
 
 insert into Tipo_Treinamento (id, nome, descricao, nivel_de_dificuldade, nivel_de_esforco)
 	values (4, 'Treino Endurance Misto',
-	           'Um treinamento diversificado com sequências de longa duração de crawl, peito, costas e borboleta'
+	           'Um treinamento diversificado com sequências de longa duração de crawl, peito, costas e borboleta',
 	           8, 9);
 
 insert into Tipo_Treinamento (id, nome, descricao, nivel_de_dificuldade, nivel_de_esforco)
 	values (5, 'Treino livre',
-	           'Faça o que quiser num percurso de 2000 m'
+	           'Faça o que quiser num percurso de 2000 m',
 	           1, 4);
 
 
@@ -285,12 +288,12 @@ insert into Tipo_Exercicio (id, nome, descricao, nivel_de_dificuldade, nivel_de_
 insert into Tipo_Exercicio (id, nome, descricao, nivel_de_dificuldade, nivel_de_esforco)
 	values (5, '1500 m peito',
 		       'Percurso longo de peito para treinar fõlego',
-		       6, 7)
+		       6, 7);
 
 insert into Tipo_Exercicio (id, nome, descricao, nivel_de_dificuldade, nivel_de_esforco)
 	values (6, '1500 m cachorrinho',
 		       'Percurso para canídeos',
-		       10, 8)
+		       10, 8);
 
 insert into Tipo_Exercicio (id, nome, descricao, nivel_de_dificuldade, nivel_de_esforco)
 	values (7, '400 m costas',
@@ -389,129 +392,130 @@ insert into Tipo_Exercicio (id, nome, descricao, nivel_de_dificuldade, nivel_de_
 
 
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (1, 'crawl', 50);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (2, 'costas', 50);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (3, 'borboleta', 50);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (4, 'peito', 50);
 
 
 -- para piscinas menores 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
-	values (5, 'crawl', 25);
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
+	values (36, 'crawl', 25);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
-	values (6, 'costas', 25);
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
+	values (37, 'costas', 25);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
-	values (7, 'borboleta', 25);
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
+	values (38, 'borboleta', 25);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
-	values (8, 'peito', 25);
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
+	values (39, 'peito', 25);
 
 -- para piscina nanicas
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (5, 'crawl', 10);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (6, 'costas', 10);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (7, 'borboleta', 10);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (8, 'peito', 10);
 
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (9, 'cachorrinho', 50);
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (10, 'cachorrinho', 25);
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (11, 'cachorrinho', 10);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
-	values (12, 'nado polvo', 50)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
+	values (12, 'nado polvo', 50);
 
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (13, 'crawl', 100);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (14, 'costas', 100);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (15, 'borboleta', 100);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (16, 'peito', 100);
 
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (17, 'crawl', 200);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (18, 'costas', 200);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (19, 'borboleta', 200);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (20, 'peito', 200);
 
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (21, 'crawl', 400);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (22, 'costas', 400);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (23, 'borboleta', 400);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (24, 'peito', 400);
 
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (25, 'crawl', 800);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (26, 'costas', 800);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (27, 'borboleta', 800);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (28, 'peito', 800);
 
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (29, 'livre', 50);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (30, 'livre', 100);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (31, 'livre', 200);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (32, 'livre', 400);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (33, 'livre', 800);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
 	values (34, 'cachorrinho', 1500);
 
-insert into Tipo_Subexercicio (id, estilo, comprimento)
-	values (34, 'peito', 1500);
+insert into Tipo_Subexercicio (id, estilo_nado, comprimento)
+	values (35, 'peito', 1500);
 
 
 
@@ -774,18 +778,35 @@ insert into Recomendacao (id_professor, id_tipo_treinamento, id_nadador)
 
 
 
+insert into Agendamento (data_horario_inicio, id_piscina, numero_raia, id_nadador)
+	values ('2017-05-31 19:00:00', 1, 1, 12);
 
 
 
+insert into Tipo_Sensor (tipo)
+	values ('pressao');
+
+insert into Tipo_Sensor (tipo)
+	values ('temperatura');
+
+insert into Tipo_Sensor (tipo)
+	values ('radio frequencia');
 
 
+insert into Tipo_Estado_Sensor (estado)
+	values ('desativado');
+
+insert into Tipo_Estado_Sensor (estado)
+	values ('operacional');
 
 
+-- a lane card reader for recording swim sessions
+insert into Sensor (id_sensor, tipo)
+	values (1, 'radio frequencia');
 
-
-
-
-
+-- our only registered sensor so far
+insert into Sensor_Raia (id_sensor, id_piscina, numero_raia)
+	values (1, 1, 1);
 
 
 

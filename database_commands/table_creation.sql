@@ -1,5 +1,7 @@
 -- table creation commands for the High Tech Pool database
--- create it in a single transaction so it gets rolled back on error
+
+create database High_Tech_Pool;
+use High_Tech_Pool;
 
 create table Pessoa (
 	id int primary key,
@@ -10,12 +12,12 @@ create table Pessoa (
 	endereco varchar(255) not null,
 	telefone varchar(255) not null,
 	data_nascimento date not null,
-	data_inscricao timestamp not null
+	data_inscricao datetime not null
 );
 
 create table Nadador (
 	id int primary key,
-	
+
 	foreign key (id) 
 		references Pessoa(id)
 );
@@ -59,7 +61,9 @@ create table Piscina (
 	id int primary key,
 	nome varchar(255) not null,
 	endereco varchar(255) not null,
-	comprimento int not null -- in meters
+	
+	-- in meters
+	comprimento int not null
 );
 
 create table Tipo_Estado_Raia (
@@ -118,7 +122,7 @@ create table Tipo_Subexercicio (
 	comprimento int not null, -- in meters
 
 	foreign key (estilo_nado) 
-		references Tipo_Nado(estilo),
+		references Tipo_Nado(estilo)
 );
 
 -- treinamento é composto de sequência de exercícios
@@ -143,10 +147,10 @@ create table Sequencia_Exercicio (
 	primary key (id_tipo_exercicio, numero_de_sequencia),
 	
 	foreign key (id_tipo_exercicio) 
-		references Tipo_Exercicio(id)	
+		references Tipo_Exercicio(id),	
 	
 	foreign key (id_tipo_subexercicio) 
-		references Tipo_Subexercicio(id),
+		references Tipo_Subexercicio(id)
 );
 
 -- professor recomenda treinamento a nadador
@@ -156,13 +160,13 @@ create table Recomendacao (
 	id_nadador int,
 	primary key (id_professor, id_tipo_treinamento, id_nadador),
 	
-	foreign key id_professor 
+	foreign key (id_professor) 
 		references Professor(id),
 	
-	foreign key id_tipo_treinamento 
+	foreign key (id_tipo_treinamento) 
 		references Tipo_Treinamento(id),
 	
-	foreign key id_nadador 
+	foreign key (id_nadador) 
 		references Nadador(id)
 );
 
@@ -176,7 +180,7 @@ create table Recomendacao (
 create table Treinamento (
 	id_tipo_treinamento int,
 	id_nadador int,
-	data_horario_inicio timestamp,
+	data_horario_inicio datetime,
 	primary key (id_tipo_treinamento, id_nadador, data_horario_inicio),
 
 	foreign key (id_tipo_treinamento) 
@@ -189,10 +193,10 @@ create table Treinamento (
 create table Exercicio ( 
 	id_tipo_treinamento int,
 	id_nadador int,
-	data_horario_inicio_treinamento timestamp,
+	data_horario_inicio_treinamento datetime,
 	numero_de_sequencia int,
 	id_tipo_exercicio int,
-	data_horario_inicio timestamp,
+	data_horario_inicio_exercicio datetime,
 	largada_mergulho boolean,
 	numero_raia int,
 	id_piscina int,
@@ -213,15 +217,15 @@ create table Exercicio (
 create table Parcial (
 	id_tipo_treinamento int,
 	id_nadador int,
-	data_horario_inicio_treinamento timestamp,
+	data_horario_inicio_treinamento datetime,
 	numero_de_sequencia_exercicio int,
 	numero_de_sequencia_parcial int,
-	data_horario_inicio timestamp,
+	data_horario_inicio datetime,
 	tempo real,
 	primary key (id_tipo_treinamento, id_nadador, data_horario_inicio_treinamento, numero_de_sequencia_exercicio, numero_de_sequencia_parcial),
 	
 	foreign key (id_tipo_treinamento, id_nadador, data_horario_inicio_treinamento, numero_de_sequencia_exercicio) 
-		references Exercicio(id_tipo_treinamento, id_nadador, data_horario_inicio_treinamento, numero_de_sequencia),
+		references Exercicio(id_tipo_treinamento, id_nadador, data_horario_inicio_treinamento, numero_de_sequencia)
 );
 
 
@@ -230,27 +234,27 @@ create table Parcial (
 create table Comparacao_Treinamento (
 	id_tipo_treinamento int,
 	id_nadador int,
-	data_horario_inicio timestamp,
+	data_horario_inicio datetime,
 	id_tipo_treinamento_comparacao int,
 	id_nadador_comparacao int,
-	data_horario_inicio_comparacao timestamp,
+	data_horario_inicio_comparacao datetime,
 	primary key (id_tipo_treinamento, id_nadador, data_horario_inicio, id_tipo_treinamento_comparacao, id_nadador_comparacao, data_horario_inicio_comparacao),
 	
 	foreign key (id_tipo_treinamento, id_nadador, data_horario_inicio)
 		references Treinamento(id_tipo_treinamento, id_nadador, data_horario_inicio),
 	
 	foreign key (id_tipo_treinamento_comparacao, id_nadador_comparacao, data_horario_inicio_comparacao)
-		references Treinamento(id_tipo_treinamento, id_nadador, data_horario_inicio),				
+		references Treinamento(id_tipo_treinamento, id_nadador, data_horario_inicio)
 );
 
 create table Comparacao_Exercicio (
 	id_tipo_treinamento int,
 	id_nadador int,
-	data_horario_inicio_treinamento timestamp,
+	data_horario_inicio_treinamento datetime,
 	numero_de_sequencia int,
 	id_tipo_treinamento_comparacao int,
 	id_nadador_comparacao int,
-	data_horario_inicio_treinamento_comparacao timestamp,
+	data_horario_inicio_treinamento_comparacao datetime,
 	numero_de_sequencia_comparacao int,
 	primary key (id_tipo_treinamento, id_nadador, data_horario_inicio_treinamento, numero_de_sequencia,	id_tipo_treinamento_comparacao,	id_nadador_comparacao, data_horario_inicio_treinamento_comparacao, numero_de_sequencia_comparacao),
 
@@ -266,8 +270,8 @@ create table Sessao (
 	id_nadador int,
 	id_piscina int,
 	numero_raia int,
-	data_horario_inicio timestamp,
-	data_horario_fim timestamp,
+	data_horario_inicio datetime,
+	data_horario_fim datetime,
 	primary key (id_nadador, id_piscina, numero_raia, data_horario_inicio),
 	
 	foreign key (id_nadador)
@@ -281,7 +285,7 @@ create table Sessao (
 
 -- nadador agenda um horario numa determinada raia
 create table Agendamento (
-	data_horario_inicio timestamp,
+	data_horario_inicio datetime,
 	id_piscina int,
 	numero_raia int,
 	id_nadador int not null,
@@ -297,9 +301,9 @@ create table Agendamento (
 -- registro de temperatura para uma piscina num dado instante
 create table Temperatura (
 	id_piscina int,
-	momento_de_medicao timestamp,
+	momento_de_medicao datetime,
 	temperatura real not null,
-	primary key (id_piscina, momento_de_medicao)
+	primary key (id_piscina, momento_de_medicao),
 	
 	foreign key (id_piscina)
 		references Piscina(id)
@@ -316,13 +320,13 @@ create table Tipo_Estado_Sensor (
 -- herança parcial e exclusiva de sensores
 create table Sensor (
 	id_sensor int primary key,
-	tipo varchar(255),
-	estado varchar(255),
+	tipo varchar(255) not null,
+	estado varchar(255) not null default 'desativado',
 	
-	foreign key tipo
+	foreign key (tipo)
 		references Tipo_Sensor(tipo),
 	
-	foreign key estado 
+	foreign key (estado) 
 		references Tipo_Estado_Sensor(estado)
 );
 
@@ -331,6 +335,9 @@ create table Sensor_Raia (
 	id_piscina int,
 	numero_raia int,
 	
+	foreign key (id_sensor)
+		references Sensor(id_sensor),
+
 	foreign key (id_piscina, numero_raia)
 		references Raia(id_piscina, numero)
 );
@@ -338,7 +345,11 @@ create table Sensor_Raia (
 create table Sensor_Piscina (
 	id_sensor int primary key,
 	id_piscina int,
+
+	foreign key (id_sensor)
+		references Sensor(id_sensor),
 	
-	foreign key id_piscina
+	foreign key (id_piscina)
 		references Piscina(id)
 );
+

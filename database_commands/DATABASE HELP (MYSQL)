@@ -1,0 +1,20 @@
+DATABASE HELP (MYSQL)
+
+-- invoke with
+mysql -u <user> -h <host, localhost by default> -p
+
+
+-- some good mysql prompt commands
+
+show databases;
+
+select database(); -- which is the current selected database
+
+use <database>;
+
+--when you have a database selected
+
+show tables;
+
+-- double dash comments require a space after the double dash
+-- how fucked up is that ??? (that the compiler won't TELL YOU AT ALL)
