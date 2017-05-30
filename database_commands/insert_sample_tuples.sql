@@ -43,6 +43,43 @@ insert into Pessoa (id, CPF, RG, nome, sobrenome, endereco, telefone, data_nasci
 	values (12, '858333666', '47008556', 'Tony', 'Montana', 'Room 101, Alcatraz, CA, USA', '(6) 07010001', '1980-10-08', '2017-05-18 19:59:39');
 
 
+insert into Credenciais_Acesso (id, username, password)
+	values (1, 'senha');
+
+insert into Credenciais_Acesso (id, username, password)
+	values (2, 'senha');
+
+insert into Credenciais_Acesso (id, username, password)
+	values (3, 'senha');
+
+insert into Credenciais_Acesso (id, username, password)
+	values (4, 'senha');
+
+insert into Credenciais_Acesso (id, username, password)
+	values (5, 'senha');
+
+insert into Credenciais_Acesso (id, username, password)
+	values (6,  'senha');
+
+insert into Credenciais_Acesso (id, username, password)
+	values (7, 'senha');
+
+insert into Credenciais_Acesso (id, username, password)
+	values (8, 'senha');
+
+insert into Credenciais_Acesso (id, username, password)
+	values (9, 'senha');
+
+insert into Credenciais_Acesso (id, username, password)
+	values (10, 'senha');
+
+insert into Credenciais_Acesso (id, username, password)
+	values (11, 'senha');
+
+insert into Credenciais_Acesso (id, username, password)
+	values (12, 'senha');
+
+
 -- everybody swims around here except Robocop.
 
 insert into Nadador (id)
@@ -777,7 +814,7 @@ insert into Recomendacao (id_professor, id_tipo_treinamento, id_nadador)
 	values (7,4,8);
 
 
-
+-- tony montana marcou horário
 insert into Agendamento (data_horario_inicio, id_piscina, numero_raia, id_nadador)
 	values ('2017-05-31 19:00:00', 1, 1, 12);
 
@@ -792,21 +829,85 @@ insert into Tipo_Sensor (tipo)
 insert into Tipo_Sensor (tipo)
 	values ('radio frequencia');
 
+-- insert into Tipo_Estado_Sensor (estado)
+-- 	values ('desativado');
+-- 
+-- insert into Tipo_Estado_Sensor (estado)
+-- 	values ('operacional');
 
-insert into Tipo_Estado_Sensor (estado)
-	values ('desativado');
 
-insert into Tipo_Estado_Sensor (estado)
-	values ('operacional');
+insert into Tipo_Funcao_Sensor (funcao)
+	values ('nenhuma');
+
+insert into Tipo_Funcao_Sensor (funcao)
+	values ('detecta plataforma de mergulho');
+
+insert into Tipo_Funcao_Sensor (funcao)
+	values ('detecta borda (lado largada)');
+
+insert into Tipo_Funcao_Sensor (funcao)
+	values ('detecta borda (lado oposto)');
+
+insert into Tipo_Funcao_Sensor (funcao)
+	values ('mede temperatura');
+
+insert into Tipo_Funcao_Sensor (funcao)
+	values ('registra presença');
 
 
--- a lane card reader for recording swim sessions
-insert into Sensor (id_sensor, tipo)
-	values (1, 'radio frequencia');
+
+-- physical sensors
+-- a lane rfid card reader for recording swim sessions
+insert into Sensor (id_sensor, tipo, funcao)
+	values (1, 'radio frequencia', 'registra presença');
 
 -- our only registered sensor so far
 insert into Sensor_Raia (id_sensor, id_piscina, numero_raia)
 	values (1, 1, 1);
+
+
+
+-- simulated sensors ('171' series)
+
+insert into Sensor (id_sensor, tipo, funcao)
+	values (171001, 'radio frequencia', 'registra presença');
+
+insert into Sensor_Raia (id_sensor, id_piscina, numero_raia)
+	values (171001, 1, 1);
+
+
+insert into Sensor (id_sensor, tipo, funcao)
+	values (171002, 'pressao', 'detecta plataforma de mergulho');
+
+insert into Sensor_Raia (id_sensor, id_piscina, numero_raia)
+	values (171002, 1, 1);
+
+
+insert into Sensor (id_sensor, tipo, funcao)
+	values (171003, 'pressao', 'detecta borda (lado largada)');
+
+insert into Sensor_Raia (id_sensor, id_piscina, numero_raia)
+	values (171003, 1, 1);
+
+
+insert into Sensor (id_sensor, tipo, funcao)
+	values (171004, 'pressao', 'detecta borda (lado oposto)');
+
+insert into Sensor_Raia (id_sensor, id_piscina, numero_raia)
+	values (171004, 1, 1);
+
+
+
+-- the only raias available so far!
+update Raia
+	set estado = 'desocupada'
+	where numero_raia = 1 and id_piscina = 1;
+
+update Raia
+	set estado = 'desocupada'
+	where numero_raia = 2 and id_piscina = 1;
+
+	
 
 
 

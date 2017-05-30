@@ -15,6 +15,15 @@ create table Pessoa (
 	data_inscricao datetime not null
 );
 
+create table Credenciais_Acesso (
+	id int primary key,
+	-- username varchar(255) unique not null,
+	password varchar(255) not null,
+
+	foreign key (id)
+		references Pessoa(id)
+);
+
 create table Nadador (
 	id int primary key,
 
@@ -313,21 +322,30 @@ create table Tipo_Sensor (
 	tipo varchar(255) primary key
 );
 
-create table Tipo_Estado_Sensor (
-	estado varchar(255) primary key
+-- not necessary (ele é operacional quando foi ligado a uma raia numa piscina)
+-- create table Tipo_Estado_Sensor (
+-- 	estado varchar(255) primary key
+-- );
+
+create table Tipo_Funcao_Sensor (
+	funcao varchar(255) primary key
 );
 
 -- herança parcial e exclusiva de sensores
 create table Sensor (
 	id_sensor int primary key,
 	tipo varchar(255) not null,
-	estado varchar(255) not null default 'desativado',
+	-- estado varchar(255) not null default 'desativado',
+	funcao varchar(255) not null default 'nenhuma',
 	
 	foreign key (tipo)
 		references Tipo_Sensor(tipo),
 	
 	foreign key (estado) 
-		references Tipo_Estado_Sensor(estado)
+		references Tipo_Estado_Sensor(estado),
+
+	foreign key (funcao)
+		references Tipo_Funcao_Sensor(funcao)
 );
 
 create table Sensor_Raia (
