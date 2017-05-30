@@ -6,12 +6,14 @@ var ocupada = false;
 var EventEmitter = require('events').EventEmitter;
 var emitter = new EventEmitter();
 
-app.get('/welcome', (req, res) => {
-    res.sendFile(path.join(__dirname+'/welcome.html'));
+app.use(express.static(__dirname + '/'));
+
+app.get('/waiting', (req, res) => {
+    res.sendFile(path.join(__dirname+'/waiting.html'));
 });
 
-app.get('/statistics', (req, res) => {
-    res.sendFile(path.join(__dirname+'/statistics.html'));
+app.get('/welcome', (req, res) => {
+    res.sendFile(path.join(__dirname+'/welcome.html'));
 });
 
 app.post('/server', (req, res) => {
