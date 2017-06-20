@@ -44,11 +44,12 @@ app.get('/welcome', (req, res) => {
 app.post('/esperando_toggle_cartao', (req, res) => {
     emitter.on('toggle_cartao', function refreshHandler () {
       console.log('evento');
-      emitter.removeListener('server', refreshHandler);
+      emitter.removeListener('toggle_cartao', refreshHandler);
       res.send('ok');
-    })
+    });
 });
 
+/*
 // list of  all the sql queries we need
 queries = [
     cabecalho_tipo_treinamento: 
@@ -87,13 +88,14 @@ app.get('./treinamentos_disponiveis', (req, res) => {
                         }
                     );
                 }
-                
+                // tem que retornar o json dessa estrutura agora
             }
         );
 
     });
 
 });
+*/
 
 // módulo de sensor de cartão posta aqui para avisar que o status da raia mudou
 // (o usuário colocou ou retirou cartão)
