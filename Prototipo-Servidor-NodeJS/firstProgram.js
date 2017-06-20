@@ -2,11 +2,27 @@ var express = require('express');
 var app = express();
 var path = require('path');
 
+var mysql = require('mysql');
+
+// vários requests do browser vão pedir informações do BD,
+// por exemplo, a lista de treinamento disponíveis
+var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'pool',
+    password: 'password',
+    database: 'High_Tech_Pool'
+});
+
+// usado para emitir os eventos de 'toggle cartão'
+var EventEmitter = require('events').EventEmitter;
+var emitter = new EventEmitter();
+
+
+// estado da(s) High Tech Pool(s):
+
 // a raia está ocupada? inicialmente não
 var ocupada = false; 
 
-var EventEmitter = require('events').EventEmitter;
-var emitter = new EventEmitter();
 
 // vai servir estaticamente tudo nessa pasta ...
 app.use(express.static(__dirname + '/'));
@@ -35,7 +51,10 @@ app.post('/esperando_toggle_cartao', (req, res) => {
 
 // retorna uma lista (JSON) de treinamentos disponiveis do BD High Tech Pool
 app.get('./treinamentos_disponiveis', (req, res) => {
-
+    connection.connect(function(err) {
+        if (err) throw err;
+        
+    })
 });
 
 // módulo de sensor de cartão posta aqui para avisar que o status da raia mudou

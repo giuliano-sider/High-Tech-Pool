@@ -115,7 +115,7 @@ create table Tipo_Exercicio (
 	descricao varchar(4096) not null,
 	nivel_de_dificuldade int not null,
 	nivel_de_esforco int not null,
-	largada_mergulho boolean,
+	largada_mergulho boolean, -- pode ser automatico eu acho.
 	
 	check (nivel_de_dificuldade <= 10 and nivel_de_dificuldade >= 1),
 	check (nivel_de_esforco <= 10 and nivel_de_esforco >= 1)

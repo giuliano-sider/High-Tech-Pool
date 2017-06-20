@@ -4,15 +4,21 @@ DATABASE HELP (MYSQL)
 mysql -u <user> -h <host, localhost by default> -p
 
 
+
 -- some good mysql prompt commands
+
+create user 'usuario'@'host' identified by 'senha';
+grant all privileges on High_Tech_Pool.* to 'pool'@'localhost';
+flush privileges;
+
 
 show databases;
 
 select database(); -- which is the current selected database
 
-use <database>;
+use <database>; -- select a database
 
---when you have a database selected
+-- when you have a database selected:
 
 show tables;
 
