@@ -1,0 +1,26 @@
+h1{
+	color: white;
+	padding: 10px;
+	font-size: 650%;
+}
+
+#showtm {
+	color: white;
+	font-size:50px;
+	font-weight:800;
+	margin-left: 625px;
+}
+
+#besttm {
+	color: white;
+	font-size:50px;
+	font-weight:800;
+	margin-left: 625px;
+}
+
+#lap {
+	color: white;
+	font-size:100px;
+	font-weight:800;
+	margin-left: 515px;
+}
