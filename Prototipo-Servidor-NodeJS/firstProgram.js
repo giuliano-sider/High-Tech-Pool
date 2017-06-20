@@ -49,11 +49,23 @@ app.post('/esperando_toggle_cartao', (req, res) => {
     })
 });
 
+queries = [
+    treinamentos: 'select * from Tipo_Treinamento;',
+
+];
+
 // retorna uma lista (JSON) de treinamentos disponiveis do BD High Tech Pool
 app.get('./treinamentos_disponiveis', (req, res) => {
     connection.connect(function(err) {
         if (err) throw err;
-        
+        treinamentos = [];
+        connection.query(
+            queries['treinamentos'],
+            function(err, results) {
+                if (err) throw err;
+                treinamentos = results.
+            }
+        );
     })
 });
 

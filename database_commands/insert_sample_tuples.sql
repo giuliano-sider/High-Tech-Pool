@@ -354,17 +354,17 @@ insert into Tipo_Exercicio (id, nome, descricao, nivel_de_dificuldade, nivel_de_
 
 insert into Tipo_Exercicio (id, nome, descricao, nivel_de_dificuldade, nivel_de_esforco)
 	values (11, '200 m costas',
-		       'Percurso curto e rápido de crawl para treinar força',
+		       'Percurso curto e rápido de costas para treinar força',
 		       3, 5);
 
 insert into Tipo_Exercicio (id, nome, descricao, nivel_de_dificuldade, nivel_de_esforco)
 	values (12, '200 m borboleta',
-		       'Percurso curto e rápido de crawl para treinar força',
+		       'Percurso curto e rápido de borboleta para treinar força',
 		       3, 5);
 
 insert into Tipo_Exercicio (id, nome, descricao, nivel_de_dificuldade, nivel_de_esforco)
 	values (13, '200 m peito',
-		       'Percurso curto e rápido de crawl para treinar força',
+		       'Percurso curto e rápido de peito para treinar força',
 		       3, 5);
 
 insert into Tipo_Exercicio (id, nome, descricao, nivel_de_dificuldade, nivel_de_esforco)
