@@ -1,4 +1,4 @@
--- table creation commands for the High Tech Pool database
+-- (MySQL) table creation commands for the High Tech Pool database
 
 create database High_Tech_Pool;
 use High_Tech_Pool;

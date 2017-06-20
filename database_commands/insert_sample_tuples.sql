@@ -1,4 +1,4 @@
--- insert some sample tuples for the High Tech Pool database. do this only once.
+-- (MySQL commands to) insert some sample tuples for the High Tech Pool database. do this only once.
 
 
 use High_Tech_Pool;
