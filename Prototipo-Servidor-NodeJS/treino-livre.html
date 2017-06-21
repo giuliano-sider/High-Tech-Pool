@@ -1,0 +1,118 @@
+<html>
+	<head>
+		<title>Nado Livre</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="css/tempo.css">
+		<script>
+ 	 window.onload = function() {
+ 		 var xhr = new XMLHttpRequest();
+ 		 xhr.open("POST", '/esperando_toggle_cartao', true);
+
+ 		 //Send the proper header information along with the request
+ 		 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+ 		 xhr.onreadystatechange = function() {//Call a function when the state changes.
+ 			 if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+ 					 window.location.href = '/waiting';
+ 			 }
+ 		 }
+ 		 xhr.send("foo=bar&lorem=ipsum");
+ 	 };
+ 	 </script>
+	</head>
+
+	<body bgcolor="#3fa9f5">
+		<h1><center>Nado Livre<center></h1>
+
+		<div id="besttm">0:0<sub>0</sub></div>
+		<div id="showtm">0:0<sub>0</sub></div>
+			<script type="text/javascript"><!--
+				// chronometer / stopwatch JS script - coursesweb.net
+
+				// Here set the minutes, seconds, and tenths-of-second when you want the chronometer to stop
+				// If all these values are set to 0, the chronometer not stop automatically
+				var stmints = 0;
+				var stseconds = 0;
+				var stzecsec = 0;
+
+				// function to be executed when the chronometer stops
+				function toAutoStop() {
+				  alert('Your life goes on');
+				}
+
+				// the initial tenths-of-second, seconds, and minutes
+				var zecsec = 0;
+				var seconds = 0;
+				var mints = 0;
+
+				var best_zecsec = 0;
+				var best_seconds = 0;
+				var best_mints = 0;
+
+				var startchron = 0;
+
+				function chronometer() {
+				  if(startchron == 1) {
+				    zecsec += 1;       // set tenths of a second
+
+				    if(zecsec > 9) {
+				      zecsec = 0;
+				      seconds += 1;
+				    }
+
+				    // set minutes
+				    if(seconds > 59) {
+				      seconds = 0;
+				      mints += 1;
+				    }
+
+				    // adds data in #showtm
+				    document.getElementById('showtm').innerHTML = mints+ ':'+ seconds+ '<sub>'+ zecsec+ '</sub>';
+
+				    // if the chronometer reaches to the values for stop, calls whenChrStop(), else, auto-calls chronometer()
+				    if(zecsec == stzecsec && seconds == stseconds && mints == stmints) toAutoStop();
+				    else setTimeout("chronometer()", 100);
+				  }
+				}
+
+				function startChr() { startchron = 1; chronometer(); }      // starts the chronometer
+				function stopChr() { startchron = 0; }                      // stops the chronometer
+				function resetChr() {
+				  zecsec = 0;  seconds = 0; mints = 0;
+				  document.getElementById('showtm').innerHTML = mints+ ':'+ seconds+ '<sub>'+ zecsec+ '</sub>';
+				}
+				function pauseChr(){
+				  resetChr(); startchron = 0;
+				}
+				function updateBest(){
+					best_zecsec = zecsec;
+					best_seconds = seconds;
+					best_mints = mints;
+
+					document.getElementById('besttm').innerHTML = mints + ':' + seconds + '<sub>' + zecsec + '</sub>';
+				}
+				function voltaChr() {
+					if (startchron == 0) {
+						startChr();
+					}else{
+						if(best_mints == 0 && best_seconds == 0 && best_zecsec == 0){
+							updateBest();
+						}else if(best_mints > mints){
+							updateBest();
+						}else if(best_mints == mints && best_seconds > seconds){
+							updateBest();
+						}else if(best_mints == mints && best_seconds == seconds && best_zecsec > zecsec){
+							updatebest();
+						}
+
+						resetChr();
+					}
+				}
+			--></script>
+	</body>
+    <center>
+	  <input name="bt1" style="width: 230px" type="button" onClick="voltaChr()" value="Nova volta">
+	  <input name="bt2" style="width: 230px" type="button" onClick="pauseChr()" value="Pausa">
+    </center>
+	<center style="margin-top:30px"><input name="bt3" style="width: 230px" type="button" onClick="pauseChr(), window.open('welcome', '_self')" value="Encerrar e voltar"></center>
+</html>

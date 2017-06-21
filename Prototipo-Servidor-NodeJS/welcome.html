@@ -3,30 +3,31 @@
 		<title>Bem-Vindo</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/welcome.css" type="text/css">
-		<script>
-		window.onload = function() {
-			var xhr = new XMLHttpRequest();
-			xhr.open("POST", '/esperando_toggle_cartao', true);
+	 <script>
+	 window.onload = function() {
+		 var xhr = new XMLHttpRequest();
+		 xhr.open("POST", '/esperando_toggle_cartao', true);
 
-			//Send the proper header information along with the request
-			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		 //Send the proper header information along with the request
+		 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-			xhr.onreadystatechange = function() {//Call a function when the state changes.
-				if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-						window.location.href = '/waiting';
-				}
-			}
-			xhr.send("foo=bar&lorem=ipsum");
-		};
-		</script>
+		 xhr.onreadystatechange = function() {//Call a function when the state changes.
+			 if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+					 window.location.href = '/waiting';
+			 }
+		 }
+		 xhr.send("foo=bar&lorem=ipsum");
+	 };
+	 </script>
 	</head>
 
 	<body bgcolor="#3fa9f5">
-		<h1><center>Olá, Asdrubal</center></h1>
+		<h1>Olá, Asdrubal</h1>
 
-		<input name="bt1" style="margin-left: 320px; width: 230px" type="button" onClick="window.open('http://g1.globo.com')" value="Treino Programado" disabled>
-		<input name="bt2" style="width: 230px" type="button" onClick="window.open('http://g1.globo.com')" value="Nado Livre" disabled>
-		<input name="bt3" style="width: 230px" type="button" onClick="window.open('http://g1.globo.com')" value="Escolher Treino" disabled>
+		<center>
+          <input name="bt2" style="width: 230px" type="button" onClick="window.open('treino_livre', '_self')" value="Nado livre">
+		  <input name="bt3" style="width: 230px" type="button" onClick="window.open('escolha_treino', '_self')" value="Escolher treinamento">
+          </center>
 
 
 	</body>

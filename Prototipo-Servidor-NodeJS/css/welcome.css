@@ -1,13 +1,13 @@
-h1 {
+h1{
 	color: white;
 	padding: 20px 370px;
-	/*font-size: 750%;*/
+	font-size: 750%
 }
 
-h2 {
+h2{
 	padding-left: 320px;
 }
 
-button {
-	width: 230px;
+button{
+	width: 230;
 }
