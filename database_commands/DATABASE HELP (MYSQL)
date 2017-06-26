@@ -23,6 +23,5 @@ use <database>; -- select a database
 show tables;
 
 -- double dash comments require a space after the double dash
--- how fucked up is that ??? (that the compiler won't TELL YOU AT ALL)
 
 source <script.sql>

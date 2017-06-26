@@ -44,40 +44,40 @@ insert into Pessoa (id, CPF, RG, nome, sobrenome, endereco, telefone, data_nasci
 
 
 insert into Credenciais_Acesso (id, username, password)
-	values (1, 'senha');
+	values (1, 'charlinho', 'senha');
 
 insert into Credenciais_Acesso (id, username, password)
-	values (2, 'senha');
+	values (2, 'touro', 'senha');
 
 insert into Credenciais_Acesso (id, username, password)
-	values (3, 'senha');
+	values (3, 'diocleciano', 'senha');
 
 insert into Credenciais_Acesso (id, username, password)
-	values (4, 'senha');
+	values (4, 'jesus', 'senha');
 
 insert into Credenciais_Acesso (id, username, password)
-	values (5, 'senha');
+	values (5, 'capeta', 'senha');
 
 insert into Credenciais_Acesso (id, username, password)
-	values (6,  'senha');
+	values (6, 'barca', 'senha');
 
 insert into Credenciais_Acesso (id, username, password)
-	values (7, 'senha');
+	values (7, 'drago', 'senha');
 
 insert into Credenciais_Acesso (id, username, password)
-	values (8, 'senha');
+	values (8, 'rocky', 'senha');
 
 insert into Credenciais_Acesso (id, username, password)
-	values (9, 'senha');
+	values (9, 'robocop', 'senha');
 
 insert into Credenciais_Acesso (id, username, password)
-	values (10, 'senha');
+	values (10, 'simba', 'senha');
 
 insert into Credenciais_Acesso (id, username, password)
-	values (11, 'senha');
+	values (11, 'scar', 'senha');
 
 insert into Credenciais_Acesso (id, username, password)
-	values (12, 'senha');
+	values (12, 'tony', 'senha');
 
 
 -- everybody swims around here except Robocop.

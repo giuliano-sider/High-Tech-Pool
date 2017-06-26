@@ -17,7 +17,7 @@ create table Pessoa (
 
 create table Credenciais_Acesso (
 	id int primary key,
-	-- username varchar(255) unique not null,
+	username varchar(255) unique not null,
 	password varchar(255) not null,
 
 	foreign key (id)
