@@ -1,14 +1,29 @@
-<html>	
+<html>
 	<head>
-		<title>10voltas</title>
+		<title>Nado Livre</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/tempo.css">
+		<script>
+ 	 window.onload = function() {
+ 		 var xhr = new XMLHttpRequest();
+ 		 xhr.open("POST", '/esperando_toggle_cartao', true);
+
+ 		 //Send the proper header information along with the request
+ 		 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+ 		 xhr.onreadystatechange = function() {//Call a function when the state changes.
+ 			 if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+ 					 window.location.href = '/waiting';
+ 			 }
+ 		 }
+ 		 xhr.send("foo=bar&lorem=ipsum");
+ 	 };
+ 	 </script>
 	</head>
 
 	<body bgcolor="#3fa9f5">
-		<h1><center>Treino<center></h1>
+		<h1><center>Nado Livre<center></h1>
 
-		<div id="lap">00/10</div>
 		<div id="besttm">0:0<sub>0</sub></div>
 		<div id="showtm">0:0<sub>0</sub></div>
 			<script type="text/javascript"><!--
@@ -30,30 +45,11 @@
 				var seconds = 0;
 				var mints = 0;
 
-				var best_zecsec = 0; 
+				var best_zecsec = 0;
 				var best_seconds = 0;
 				var best_mints = 0;
 
-				var n_voltas = 0;
-				var total_voltas = 10;
-
 				var startchron = 0;
-
-				function maskLaps(){
-					if (n_voltas < 10){
-						n_voltas_mask = '0' + n_voltas;
-					}else{
-						n_voltas_mask = n_voltas;
-					}
-
-					if (total_voltas < 10){
-						total_voltas_mask = '0' + total_voltas;
-					}else{
-						total_voltas_mask = total_voltas;
-					}
-
-				    	document.getElementById('lap').innerHTML = n_voltas_mask + '/'+ total_voltas_mask;
-				}
 
 				function chronometer() {
 				  if(startchron == 1) {
@@ -82,11 +78,11 @@
 				function startChr() { startchron = 1; chronometer(); }      // starts the chronometer
 				function stopChr() { startchron = 0; }                      // stops the chronometer
 				function resetChr() {
-				  zecsec = 0;  seconds = 0; mints = 0; 
+				  zecsec = 0;  seconds = 0; mints = 0;
 				  document.getElementById('showtm').innerHTML = mints+ ':'+ seconds+ '<sub>'+ zecsec+ '</sub>';
 				}
 				function pauseChr(){
-					resetChr(); startchron = 0;
+				  resetChr(); startchron = 0;
 				}
 				function updateBest(){
 					best_zecsec = zecsec;
@@ -96,14 +92,9 @@
 					document.getElementById('besttm').innerHTML = mints + ':' + seconds + '<sub>' + zecsec + '</sub>';
 				}
 				function voltaChr() {
-					if (startchron == 0 && n_voltas < total_voltas) {
+					if (startchron == 0) {
 						startChr();
-						n_voltas=1;
-				    		maskLaps();
-					}else if(n_voltas < total_voltas) {
-						n_voltas = n_voltas + 1;
-				    		maskLaps();
-
+					}else{
 						if(best_mints == 0 && best_seconds == 0 && best_zecsec == 0){
 							updateBest();
 						}else if(best_mints > mints){
@@ -115,13 +106,13 @@
 						}
 
 						resetChr();
-					}else{
-						pauseChr();
 					}
 				}
 			--></script>
 	</body>
-		<input name="bt1" style="margin-left: 320px; width: 230px" type="button" onClick="voltaChr()" value="Volta">
-		<input name="bt2" style="width: 230px" type="button" onClick="pauseChr()" value="Pausa">
-		<input name="bt3" style="width: 230px" type="button" onClick="pauseChr(), window.open('welcome.html', '_self')" value="Encerrar">
+    <center>
+	  <input name="bt1" style="width: 230px" type="button" onClick="voltaChr()" value="Nova volta">
+	  <input name="bt2" style="width: 230px" type="button" onClick="pauseChr()" value="Pausa">
+    </center>
+	<center style="margin-top:30px"><input name="bt3" style="width: 230px" type="button" onClick="pauseChr(), window.open('welcome', '_self')" value="Encerrar e voltar"></center>
 </html>

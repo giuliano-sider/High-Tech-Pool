@@ -3,25 +3,41 @@
 		<title>Escolher Treinamento</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/escolha-treino.css">
+		<script>
+ 	 window.onload = function() {
+ 		 var xhr = new XMLHttpRequest();
+ 		 xhr.open("POST", '/esperando_toggle_cartao', true);
+
+ 		 //Send the proper header information along with the request
+ 		 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+ 		 xhr.onreadystatechange = function() {//Call a function when the state changes.
+ 			 if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+ 					 window.location.href = '/waiting';
+ 			 }
+ 		 }
+ 		 xhr.send("foo=bar&lorem=ipsum");
+ 	 };
+ 	 </script>
 	</head>
 
 	<body bgcolor="#3fa9f5">
 		<h1><center>Escolha do Treino</center></h1>
 
 		<center><input name="bt1" style="margin-top: 20px; width: 230px"
-               type="button" onClick="window.open('treinamentoA.html',  '_self')" value="Treinamento A"></center>
+               type="button" onClick="window.open('treinamentoA',  '_self')" value="Treinamento A"></center>
         <text style="color:white"><center><br>Treinamento leve, recomendado para iniciantes.<br>Um treinamento diversificado com sequências curtas de crawl, peito, costas e borboleta.<br><br><br></center></text>
-        
+
 		<center><input name="bt2" style="width: 230px"
-               type="button" onClick="window.open('treinamentoB.html', '_self')" value="Treinamento B"></center>
+               type="button" onClick="window.open('treinamentoB', '_self')" value="Treinamento B"></center>
         <text style="color:white"><center><br>Treinamento intermediário, para quem está habituado a nadar.<br>Um treinamento diversificado com sequências de duração média de crawl, peito, costas e borboleta.<br><br><br></center></text>
-        
+
 		<center><input name="bt3" style="width: 230px"
-               type="button" onClick="window.open('treinamentoC.html', '_self')" value="Treinamento C"></center>
+               type="button" onClick="window.open('treinamentoC', '_self')" value="Treinamento C"></center>
         <text style="color:white"><center><br>Treinamento avançado, recomendado para nadadores experientes.<br>Um treinamento diversificado com sequências de longa duração de crawl, peito, costas e borboleta.<br><br><br></center></text>
 
         <center><input name="bt3" style="width: 230px"
-               type="button" onClick="window.open('welcome.html', '_self')" value="Voltar"></center>
+               type="button" onClick="window.open('welcome', '_self')" value="Voltar"></center>
 
 	</body>
 </html>
