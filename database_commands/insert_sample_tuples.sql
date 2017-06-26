@@ -204,23 +204,23 @@ insert into Raia (numero, id_piscina)
 -- 10 lanes (theoretically...) at the high tech pool
 insert into Raia (numero, id_piscina, estado)
 	values (1, 1, 'desocupada');
-insert into Raia (numero, id_piscina)
+insert into Raia (numero, id_piscina, estado)
 	values (2, 1, 'desocupada');
-insert into Raia (numero, id_piscina)
+insert into Raia (numero, id_piscina, estado)
 	values (3, 1, 'desocupada');
-insert into Raia (numero, id_piscina)
+insert into Raia (numero, id_piscina, estado)
 	values (4, 1, 'desocupada');
-insert into Raia (numero, id_piscina)
+insert into Raia (numero, id_piscina, estado)
 	values (5, 1, 'desocupada');
-insert into Raia (numero, id_piscina)
+insert into Raia (numero, id_piscina, estado)
 	values (6, 1, 'desocupada');
-insert into Raia (numero, id_piscina)
+insert into Raia (numero, id_piscina, estado)
 	values (7, 1, 'desocupada');
-insert into Raia (numero, id_piscina)
+insert into Raia (numero, id_piscina, estado)
 	values (8, 1, 'desocupada');
-insert into Raia (numero, id_piscina)
+insert into Raia (numero, id_piscina, estado)
 	values (9, 1, 'desocupada');
-insert into Raia (numero, id_piscina)
+insert into Raia (numero, id_piscina, estado)
 	values (10, 1, 'desocupada');
 
 
@@ -903,11 +903,11 @@ insert into Sensor_Raia (id_sensor, id_piscina, numero_raia)
 -- the only raias available so far!
 update Raia
 	set estado = 'desocupada'
-	where numero_raia = 1 and id_piscina = 1;
+	where numero = 1 and id_piscina = 1;
 
 update Raia
 	set estado = 'desocupada'
-	where numero_raia = 2 and id_piscina = 1;
+	where numero = 2 and id_piscina = 1;
 
 	
 

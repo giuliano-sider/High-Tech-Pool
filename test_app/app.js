@@ -9,9 +9,9 @@ var session = require('express-session');
 var https = require('https');
 var fs = require('fs');
 
+// utilizamos uma única conexão mysql. good enough for our purposes
 var mysql = require('mysql');
-
-var conn = mysql.createConnection({
+var mysql_conn = mysql.createConnection({
     host: "localhost",
     user: "pool",
     password: "password",
@@ -20,6 +20,7 @@ var conn = mysql.createConnection({
 
 var mid = require('./middlewares.js');
 var pm = require('./pool_management.js');
+var q = require('./queries.js');
 
 // generate a cookie secret
 var randomstring = require('randomstring');
@@ -83,12 +84,26 @@ app.post('/login_raia', function(req, res) {
 
     // lock the requested piscina/raia while we verify the login details
     // is there a better way to do this with DB transactions?
-    pm.lock_lane(req.body.id_piscina, req.body.numero_raia);
+    pm.set_lane_status(req.body.id_piscina, req.body.numero_raia, 'travada');
 
     // user must be an admin
-    // lane state must be 'desocupada'
+    mysql_conn.connect((err) => {
+        if (err) throw err;
+        mysql_conn.query(
+            queries['dados_admin_login_attempt'](req.body.username, req.body.password),
+            (err, results) => {
+                if (err) throw err;
+                if (!results[0]) { // invalid login attempt
+                    pm.free_lane(req.body.id_piscina, req.body.numero_raia);
+                    res.status(401);
+                    res.send('401 - Login inválido. Você é adminstrador?');
+                }
+                // lane state must be 'desocupada'
+                
+            }
+        );
+    });
     
-
 
 });
 

@@ -341,8 +341,8 @@ create table Sensor (
 	foreign key (tipo)
 		references Tipo_Sensor(tipo),
 	
-	foreign key (estado) 
-		references Tipo_Estado_Sensor(estado),
+	--  foreign key (estado) 
+	--  	references Tipo_Estado_Sensor(estado),
 
 	foreign key (funcao)
 		references Tipo_Funcao_Sensor(funcao)
