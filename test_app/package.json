@@ -1,0 +1,28 @@
+{
+  "name": "test_app_high_tech_pool",
+  "version": "1.0.0",
+  "description": "test app for high tech pool. can we get a working architectural skeleton in place?",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pool",
+    "swimming",
+    "competition",
+    "exercise",
+    "fitness",
+    "technology"
+  ],
+  "author": "sultans of software",
+  "license": "GPL-2.0",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.3",
+    "express-session": "^1.15.3",
+    "morgan": "^1.8.2",
+    "mysql": "^2.13.0",
+    "randomstring": "^1.1.5"
+  }
+}

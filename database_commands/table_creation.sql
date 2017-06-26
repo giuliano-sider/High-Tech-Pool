@@ -72,7 +72,7 @@ create table Piscina (
 	endereco varchar(255) not null,
 	
 	-- in meters
-	comprimento int not null
+	comprimento int not null check(comprimento > 0)
 );
 
 create table Tipo_Estado_Raia (

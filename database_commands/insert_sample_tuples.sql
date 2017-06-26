@@ -155,6 +155,8 @@ insert into Tipo_Estado_Raia (estado)
 insert into Tipo_Estado_Raia (estado)
 	values ('desocupada'); -- lane is plugged into the system, waiting for a swimmer (exhibits wait screen)
 insert into Tipo_Estado_Raia (estado)
+	values ('travada'); -- lane is plugged into the system, but not available for use
+insert into Tipo_Estado_Raia (estado)
 	values ('tela bemvindo'); -- showing welcome screen
 insert into Tipo_Estado_Raia (estado)
 	values ('tela escolhe treinamento'); -- swimmer looking for a training routine
@@ -162,8 +164,8 @@ insert into Tipo_Estado_Raia (estado)
 	values ('tela mostra treinamento'); -- swimmer reviewing his results, previewing his exercises, etc.
 insert into Tipo_Estado_Raia (estado)
 	values ('tela mostra grafico'); -- swimmer reviewing his results in a bar plot
-insert into Tipo_Estado_Raia (estado)
-	values ('tela largada'); -- swimmer preparing to dive/start swimming
+--  insert into Tipo_Estado_Raia (estado) -- largada é automática agora
+--  	values ('tela largada'); -- swimmer preparing to dive/start swimming
 insert into Tipo_Estado_Raia (estado)
 	values ('nadando'); -- swim, swim, swim
 -- do we need the 'screen' states at all? should we log these states in a specific separate relation?
@@ -200,26 +202,26 @@ insert into Raia (numero, id_piscina)
 	values (13, 2);
 
 -- 10 lanes (theoretically...) at the high tech pool
+insert into Raia (numero, id_piscina, estado)
+	values (1, 1, 'desocupada');
 insert into Raia (numero, id_piscina)
-	values (1, 1);
+	values (2, 1, 'desocupada');
 insert into Raia (numero, id_piscina)
-	values (2, 1);
+	values (3, 1, 'desocupada');
 insert into Raia (numero, id_piscina)
-	values (3, 1);
+	values (4, 1, 'desocupada');
 insert into Raia (numero, id_piscina)
-	values (4, 1);
+	values (5, 1, 'desocupada');
 insert into Raia (numero, id_piscina)
-	values (5, 1);
+	values (6, 1, 'desocupada');
 insert into Raia (numero, id_piscina)
-	values (6, 1);
+	values (7, 1, 'desocupada');
 insert into Raia (numero, id_piscina)
-	values (7, 1);
+	values (8, 1, 'desocupada');
 insert into Raia (numero, id_piscina)
-	values (8, 1);
+	values (9, 1, 'desocupada');
 insert into Raia (numero, id_piscina)
-	values (9, 1);
-insert into Raia (numero, id_piscina)
-	values (10, 1);
+	values (10, 1, 'desocupada');
 
 
 -- styles of swimming
