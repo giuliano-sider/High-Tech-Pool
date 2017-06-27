@@ -7,6 +7,8 @@ var mysql = require('mysql');
 
 var serialport = require('serialport');
 
+//var pm = require('./pool_manager'); // data structures to keep track of user laps, etc
+
 // vários requests do browser vão pedir informações do BD,
 // por exemplo, a lista de treinamento disponíveis
 var connection = mysql.createConnection({
@@ -26,7 +28,7 @@ var serialPort = new serialport(arduinoSerialPort, {
 serialPort.on('data', function (data) {
 	// data = JSON.parse(data);
 	emit_toggle();
-  console.log('got data:\n' + data);
+    console.log('got data:\n' + data);
 });
 
 // usado para emitir os eventos de 'toggle cartão'
@@ -81,7 +83,7 @@ app.post('/esperando_toggle_cartao', (req, res) => {
     emitter.on('toggle_cartao', function refreshHandler () {
       console.log('evento de cartão');
       emitter.removeListener('toggle_cartao', refreshHandler);
-      res.send('ok');
+      res.send('ok ');
     });
 });
 
@@ -120,10 +122,10 @@ app.listen(3000, () => {
 
 var emit_toggle = (data = {}) => {
 	axios({
-    method: 'post',
-    url: 'http://localhost:3000/toggle_cartao',
-		data
-  })
+        method: 'post',
+        url: 'http://localhost:3000/toggle_cartao',
+    		data
+    })
 	.then((response) => { console.log(response); })
 	.catch((err) => {
      console.log("Promise Rejected", err);
@@ -132,10 +134,10 @@ var emit_toggle = (data = {}) => {
 
 var emit_batida = (data = {}) => {
 	axios({
-    method: 'post',
-    url: 'http://localhost:3000/batida_sensor',
-		data
-  })
+        method: 'post',
+        url: 'http://localhost:3000/batida_sensor',
+    		data
+    })
 	.then((response) => { console.log(response); })
 	.catch((err) => {
      console.log("Promise Rejected", err);
