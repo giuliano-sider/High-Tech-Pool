@@ -5,7 +5,8 @@
   "main": "firstProgram.js",
   "dependencies": {
     "express": "^4.15.3",
-    "mysql": "^2.13.0"
+    "mysql": "^2.13.0",
+    "serialport": "^4.0.7"
   },
   "devDependencies": {},
   "scripts": {

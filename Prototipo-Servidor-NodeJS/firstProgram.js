@@ -4,6 +4,8 @@ var path = require('path');
 
 var mysql = require('mysql');
 
+var serialport = require('serialport');
+
 // vários requests do browser vão pedir informações do BD,
 // por exemplo, a lista de treinamento disponíveis
 var connection = mysql.createConnection({
@@ -12,6 +14,17 @@ var connection = mysql.createConnection({
     password: 'password',
     database: 'High_Tech_Pool'
 });
+
+//var arduinoSerialPort = '/dev/ttyACM0'; // check which device file it really is
+//// listening on the serial port for data coming from Arduino over USB
+//var serialPort = new serialport.SerialPort(arduinoSerialPort, {
+//    parser: serialport.parsers.readline('\n') // every line is a data event
+//});
+//
+//// when a new line of text is received from Arduino over USB
+//serialPort.on('data', function (data) {
+//    console.log('got data:\n' + data);
+//});
 
 // usado para emitir os eventos de 'toggle cartão'
 var EventEmitter = require('events').EventEmitter;

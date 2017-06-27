@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var https = require('https');
 var fs = require('fs');
+var socket_io = require('socket.io');
 
 // utilizamos uma única conexão mysql. good enough for our purposes
 var mysql = require('mysql');
@@ -20,7 +21,7 @@ var mysql_conn = mysql.createConnection({
 
 var mid = require('./middlewares.js');
 var pm = require('./pool_management.js');
-var q = require('./queries.js');
+var queries = require('./queries.js');
 
 // generate a cookie secret
 var randomstring = require('randomstring');
@@ -30,6 +31,26 @@ var cookieSecret = randomstring.generate({
 });
 
 var app = express();
+
+// command for getting the private key and the (self signed) public certificate for https:
+// openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
+var https_options = {
+    key: fs.readFileSync(__dirname + '/ssl/key.pem'),
+    cert: fs.readFileSync(__dirname + '/ssl/cert.pem')
+};
+
+// create server and socket io
+var server = https.createServer(https_options, app);
+var io = socket_io(server);
+
+io.on('connection', function(socket){
+    console.log('a user connected\nSocket:\n' + socket);// JSON.stringify(socket, null, 4));
+    socket.on('get session info', function(msg) {
+        var session_info = JSON.parse(msg);
+        io.emit('receive session info', '{"hello":"hi"}') // need to provide session informaation...
+    });
+});
+
 
 // use port 3000 by default, but you can set a PORT environment variable
 var port = process.env.PORT || 3000;
@@ -88,18 +109,50 @@ app.post('/login_raia', function(req, res) {
 
     // user must be an admin
     mysql_conn.connect((err) => {
-        if (err) throw err;
+        if (err) {
+            pm.free_lane(req.body.id_piscina, req.body.numero_raia);
+            throw err;
+        }
         mysql_conn.query(
             queries['dados_admin_login_attempt'](req.body.username, req.body.password),
             (err, results) => {
-                if (err) throw err;
+                if (err) {
+                    pm.free_lane(req.body.id_piscina, req.body.numero_raia);
+                    throw err;  
+                } 
                 if (!results[0]) { // invalid login attempt
                     pm.free_lane(req.body.id_piscina, req.body.numero_raia);
                     res.status(401);
                     res.send('401 - Login inválido. Você é adminstrador?');
                 }
-                // lane state must be 'desocupada'
+
+                // login approved!
+                req.session.loggedRaia = true;
+                req.session.admin_user = results[0]; // all the admin user data
+                req.session.id_piscina = req.body.id_piscina;
+                req.session.numero_raia = req.body.numero_raia;
+                pm.set_lane_status(req.session.id_piscina, req.session.numero_raia, 'tela bemvindo');
                 
+                res.redirect('/raia_espera');
+
+                /* too much work (and unnecessary) to maintain lane state on the database
+                // lane state must be 'desocupada'
+                mysql_conn.query(
+                    queries['estado_raia'](req.body.id_piscina, req.body.numero_raia),
+                    (err, results) => {
+                        if (err) {
+                            pm.free_lane(req.body.id_piscina, req.body.numero_raia);
+                            throw err;  
+                        }
+                        if (!results[0]['estado'] !== 'desocupada') {
+                            pm.free_lane(req.body.id_piscina, req.body.numero_raia);
+                            res.status(401);
+                            res.send('401 - Login inválido. A raia tem estado ' + results[0]['estado']);
+                        }
+
+                    }
+                );
+                */
             }
         );
     });
@@ -107,11 +160,24 @@ app.post('/login_raia', function(req, res) {
 
 });
 
+// page wants to know (via XHR) its user session key for socket.io communications
+app.get('/io_session_key', (req, res) => {
+    if (!req.session.loggedRaia) {
+        res.json({error: 'not logged in'});
+    } else {
+        res.json({
+            username: req.session.admin_user['username'],
+            numero_raia: req.session.numero_raia,
+            id_piscina: req.session.id_piscina
+        });
+    }
+});
+
 // tela de espera duma raia
 app.get('/raia_espera',
     mid.authenticateRaiaLogin,
     function(req, res) {
-        
+        res.sendFile(__dirname + '/private/waiting.html')
     }
 );
 
@@ -130,14 +196,7 @@ app.use(function(err, req, res, next) {
     res.send('500 - Erro interno do servidor. Consulte seu adminstrador do High Tech Pool');
 });
 
-// command for getting the private key and the (self signed) public certificate for https:
-// openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
-var https_options = {
-    key: fs.readFileSync(__dirname + '/ssl/key.pem'),
-    cert: fs.readFileSync(__dirname + '/ssl/cert.pem')
-};
-// launch server
-https.createServer(https_options, app).listen(port, function() {
+server.listen(port, function() {
     console.log(
         'Starting at: ' + Date() + '\n' +
         'High Tech Pool server running on https://localhost:' + port + '\n' +
