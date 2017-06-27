@@ -2,10 +2,6 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var axios = require('axios');
-var instance = axios.create({
-	baseUrl: 'localhost:3000',
-	timeout: 2000
-});
 
 var mysql = require('mysql');
 
@@ -30,7 +26,7 @@ var serialPort = new serialport(arduinoSerialPort, {
 serialPort.on('data', function (data) {
 	// data = JSON.parse(data);
 	emit_toggle();
-    console.log('got data:\n' + data);
+  console.log('got data:\n' + data);
 });
 
 // usado para emitir os eventos de 'toggle cartão'
@@ -83,12 +79,11 @@ app.get('/treinamentoC', (req, res) => {
 // SOLUÇÃO: web sockets?
 app.post('/esperando_toggle_cartao', (req, res) => {
     emitter.on('toggle_cartao', function refreshHandler () {
-      console.log('evento');
+      console.log('evento de cartão');
       emitter.removeListener('toggle_cartao', refreshHandler);
       res.send('ok');
     });
 });
-
 
 // módulo de sensor de cartão posta aqui para avisar que o status da raia mudou
 // (o usuário colocou ou retirou cartão)
@@ -99,10 +94,50 @@ app.post('/toggle_cartao', function (req, res) {
     res.send('Got a POST request');
 });
 
+
+// páginas do treinamento postam aqui
+// para esperar o evento de batida de sensores da raia
+// PROBLEMA: acho que esse request dá timeout depois de um tempo
+// SOLUÇÃO: web sockets?
+app.post('/esperando_batida_sensor', (req, res) => {
+    emitter.on('batida_sensor', function refreshHandler () {
+      console.log('evento de batida');
+      emitter.removeListener('batida_sensor', refreshHandler);
+      res.send('ok');
+    });
+});
+
+// módulo de sensor de batida posta aqui para informar que o nadador bateu na borda
+app.post('/batida_sensor', function (req, res) {
+    console.log(req.url);
+    emitter.emit('batida_sensor', {});
+    res.send('Got a POST request');
+});
+
 app.listen(3000, () => {
     console.log('Example app listening on port 3000!');
 });
 
-var emit_toggle = function() {
-	axios.post('localhost:3000/toggle_cartao', {});
+var emit_toggle = (data = {}) => {
+	axios({
+    method: 'post',
+    url: 'http://localhost:3000/toggle_cartao',
+		data
+  })
+	.then((response) => { console.log(response); })
+	.catch((err) => {
+     console.log("Promise Rejected", err);
+	});
+};
+
+var emit_batida = (data = {}) => {
+	axios({
+    method: 'post',
+    url: 'http://localhost:3000/batida_sensor',
+		data
+  })
+	.then((response) => { console.log(response); })
+	.catch((err) => {
+     console.log("Promise Rejected", err);
+	});
 };

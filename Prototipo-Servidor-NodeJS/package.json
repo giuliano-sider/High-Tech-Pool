@@ -1,5 +1,5 @@
 {
-  "name": "learning-nodejs",
+  "name": "hightechpool",
   "version": "1.0.0",
   "description": "learning nodejs",
   "main": "firstProgram.js",
@@ -14,5 +14,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "me",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giuliano-sider/High-Tech-Pool.git"
+  },
+  "bugs": {
+    "url": "https://github.com/giuliano-sider/High-Tech-Pool/issues"
+  },
+  "homepage": "https://github.com/giuliano-sider/High-Tech-Pool#readme"
 }
