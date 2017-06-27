@@ -1,24 +1,31 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+
+// makes http requests programatically
 var axios = require('axios');
 
+// logging
+var morgan = require('morgan');
+
+// did not make into the final product!
 var mysql = require('mysql');
 
+// communication with the arduino via serial port
 var serialport = require('serialport');
-
-//var pm = require('./pool_manager'); // data structures to keep track of user laps, etc
 
 // vários requests do browser vão pedir informações do BD,
 // por exemplo, a lista de treinamento disponíveis
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'pool',
-    password: 'password',
-    database: 'High_Tech_Pool'
-});
+//var connection = mysql.createConnection({
+//    host: 'localhost',
+//    user: 'pool',
+//    password: 'password',
+//    database: 'High_Tech_Pool'
+//});
 
-var arduinoSerialPort = '/dev/ttyACM0'; // check which device file it really is
+// check which device file it really is by comparing /dev/tty* before and after plugging in the serial cable
+var arduinoSerialPort = '/dev/ttyACM0'; 
+
 // listening on the serial port for data coming from Arduino over USB
 var serialPort = new serialport(arduinoSerialPort, {
     parser: serialport.parsers.readline('\n') // every line is a data event
@@ -26,9 +33,18 @@ var serialPort = new serialport(arduinoSerialPort, {
 
 // when a new line of text is received from Arduino over USB
 serialPort.on('data', function (data) {
-	// data = JSON.parse(data);
-	emit_toggle();
-    console.log('got data:\n' + data);
+	data = JSON.parse(data);
+	//data = "{ \"sensor\":\"knock1\", \"value\": true }"; // test data
+
+	if (data.sensor !== 'rfid' ) {
+		// batida de sensor
+		emit_batida();
+	} else if (data.sensor === 'rfid') {
+		// cartao colocado ou retirado
+		emit_toggle();
+	}
+	
+	console.log('raspberry pi got data from serial port:\n', data);
 });
 
 // usado para emitir os eventos de 'toggle cartão'
@@ -41,6 +57,10 @@ var emitter = new EventEmitter();
 // a raia está ocupada? inicialmente não
 var ocupada = false;
 
+
+// log every request in the format:
+// :method :url :status :response-time ms - :res[content-length]
+app.use(morgan('dev'));
 
 // vai servir estaticamente tudo nessa pasta ...
 app.use(express.static(__dirname + '/'));
@@ -102,6 +122,7 @@ app.post('/toggle_cartao', function (req, res) {
 // PROBLEMA: acho que esse request dá timeout depois de um tempo
 // SOLUÇÃO: web sockets?
 app.post('/esperando_batida_sensor', (req, res) => {
+	console.log('oi, eu acabei de receber um /esperando_batida_snesor');
     emitter.on('batida_sensor', function refreshHandler () {
       console.log('evento de batida');
       emitter.removeListener('batida_sensor', refreshHandler);
@@ -120,25 +141,27 @@ app.listen(3000, () => {
     console.log('Example app listening on port 3000!');
 });
 
+// ação a ser tomada quando houve uma mudança no estado do cartão
 var emit_toggle = (data = {}) => {
 	axios({
         method: 'post',
         url: 'http://localhost:3000/toggle_cartao',
     		data
     })
-	.then((response) => { console.log(response); })
+	.then((response) => { /*console.log(response);*/ })
 	.catch((err) => {
      console.log("Promise Rejected", err);
 	});
 };
 
+// ação a ser tomada quando houve uma batida de sensor
 var emit_batida = (data = {}) => {
 	axios({
         method: 'post',
         url: 'http://localhost:3000/batida_sensor',
     		data
     })
-	.then((response) => { console.log(response); })
+	.then((response) => { /*console.log(response);*/ })
 	.catch((err) => {
      console.log("Promise Rejected", err);
 	});
