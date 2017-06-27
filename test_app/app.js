@@ -10,6 +10,9 @@ var https = require('https');
 var fs = require('fs');
 var socket_io = require('socket.io');
 
+var serialport = require('serialport');
+
+
 // utilizamos uma única conexão mysql. good enough for our purposes
 var mysql = require('mysql');
 var mysql_conn = mysql.createConnection({
@@ -22,6 +25,17 @@ var mysql_conn = mysql.createConnection({
 var mid = require('./middlewares.js');
 var pm = require('./pool_management.js');
 var queries = require('./queries.js');
+
+//var arduinoSerialPort = '/dev/ttyACM0'; // check which device file it really is
+// listening on the serial port for data coming from Arduino over USB
+//var serialPort = new serialport.SerialPort(arduinoSerialPort, {
+//    parser: serialport.parsers.readline('\n') // every line is a data event
+//});
+
+// when a new line of text is received from Arduino over USB
+//serialPort.on('data', function (data) {
+//    console.log('got data:\n' + data);
+//});
 
 // generate a cookie secret
 var randomstring = require('randomstring');

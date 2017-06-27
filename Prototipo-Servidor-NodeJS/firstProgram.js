@@ -1,6 +1,11 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+var axios = require('axios');
+var instance = axios.create({
+	baseUrl: 'localhost:3000',
+	timeout: 2000
+});
 
 var mysql = require('mysql');
 
@@ -15,16 +20,18 @@ var connection = mysql.createConnection({
     database: 'High_Tech_Pool'
 });
 
-//var arduinoSerialPort = '/dev/ttyACM0'; // check which device file it really is
-//// listening on the serial port for data coming from Arduino over USB
-//var serialPort = new serialport.SerialPort(arduinoSerialPort, {
-//    parser: serialport.parsers.readline('\n') // every line is a data event
-//});
-//
-//// when a new line of text is received from Arduino over USB
-//serialPort.on('data', function (data) {
-//    console.log('got data:\n' + data);
-//});
+var arduinoSerialPort = '/dev/ttyACM0'; // check which device file it really is
+// listening on the serial port for data coming from Arduino over USB
+var serialPort = new serialport(arduinoSerialPort, {
+    parser: serialport.parsers.readline('\n') // every line is a data event
+});
+
+// when a new line of text is received from Arduino over USB
+serialPort.on('data', function (data) {
+	// data = JSON.parse(data);
+	emit_toggle();
+    console.log('got data:\n' + data);
+});
 
 // usado para emitir os eventos de 'toggle cartão'
 var EventEmitter = require('events').EventEmitter;
@@ -95,3 +102,7 @@ app.post('/toggle_cartao', function (req, res) {
 app.listen(3000, () => {
     console.log('Example app listening on port 3000!');
 });
+
+var emit_toggle = function() {
+	axios.post('localhost:3000/toggle_cartao', {});
+};
