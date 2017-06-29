@@ -12,7 +12,7 @@ var morgan = require('morgan');
 var mysql = require('mysql');
 
 // communication with the arduino via serial port
-var serialport = require('serialport');
+//var serialport = require('serialport');
 
 // vários requests do browser vão pedir informações do BD,
 // por exemplo, a lista de treinamento disponíveis
@@ -24,28 +24,28 @@ var serialport = require('serialport');
 //});
 
 // check which device file it really is by comparing /dev/tty* before and after plugging in the serial cable
-var arduinoSerialPort = '/dev/ttyACM0'; 
-
-// listening on the serial port for data coming from Arduino over USB
-var serialPort = new serialport(arduinoSerialPort, {
-    parser: serialport.parsers.readline('\n') // every line is a data event
-});
-
-// when a new line of text is received from Arduino over USB
-serialPort.on('data', function (data) {
-	data = JSON.parse(data);
-	//data = "{ \"sensor\":\"knock1\", \"value\": true }"; // test data
-
-	if (data.sensor !== 'rfid' ) {
-		// batida de sensor
-		emit_batida();
-	} else if (data.sensor === 'rfid') {
-		// cartao colocado ou retirado
-		emit_toggle();
-	}
-	
-	console.log('raspberry pi got data from serial port:\n', data);
-});
+// var arduinoSerialPort = '/dev/ttyACM0';
+//
+// // listening on the serial port for data coming from Arduino over USB
+// var serialPort = new serialport(arduinoSerialPort, {
+//     parser: serialport.parsers.readline('\n') // every line is a data event
+// });
+//
+// // when a new line of text is received from Arduino over USB
+// serialPort.on('data', function (data) {
+// 	data = JSON.parse(data);
+// 	//data = "{ \"sensor\":\"knock1\", \"value\": true }"; // test data
+//
+// 	if (data.sensor !== 'rfid' ) {
+// 		// batida de sensor
+// 		emit_batida();
+// 	} else if (data.sensor === 'rfid') {
+// 		// cartao colocado ou retirado
+// 		emit_toggle();
+// 	}
+//
+// 	console.log('raspberry pi got data from serial port:\n', data);
+// });
 
 // usado para emitir os eventos de 'toggle cartão'
 var EventEmitter = require('events').EventEmitter;
